@@ -1,20 +1,35 @@
 package DTO;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ClientDTO {
-    private String id;
+    private Long id;
     private String clientName;
     private String accountNumber;
-    private String clientPass;
+    private String accountPass;
     private String clientCreatedAt;
-    private int balance;
+    private long balance = 0;
 
+    private static long num = 1L;
 
+    public ClientDTO() {
+    }
 
-    public String getId() {
+    public ClientDTO(String clientName, String accountNumber, String accountPass) {
+        this.id = num++;
+        this.clientName = clientName;
+        this.accountNumber = accountNumber;
+        this.accountPass = accountPass;
+        LocalDateTime now = LocalDateTime.now();
+        this.clientCreatedAt = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -22,7 +37,7 @@ public class ClientDTO {
         return clientName;
     }
 
-    public void setClientName(String clientName) {
+    public void setClintName(String clientName) {
         this.clientName = clientName;
     }
 
@@ -34,12 +49,12 @@ public class ClientDTO {
         this.accountNumber = accountNumber;
     }
 
-    public String getClientPass() {
-        return clientPass;
+    public String getAccountPass() {
+        return accountPass;
     }
 
-    public void setClientPass(String clientPass) {
-        this.clientPass = clientPass;
+    public void setAccountPass(String accountPass) {
+        this.accountPass = accountPass;
     }
 
     public String getClientCreatedAt() {
@@ -50,21 +65,21 @@ public class ClientDTO {
         this.clientCreatedAt = clientCreatedAt;
     }
 
-    public int getBalance() {
+    public long getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(long balance) {
         this.balance = balance;
     }
 
     @Override
     public String toString() {
         return "ClientDTO{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", clientName='" + clientName + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +
-                ", clientPass='" + clientPass + '\'' +
+                ", accountPass='" + accountPass + '\'' +
                 ", clientCreatedAt='" + clientCreatedAt + '\'' +
                 ", balance=" + balance +
                 '}';

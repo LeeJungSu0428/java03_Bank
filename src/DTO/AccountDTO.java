@@ -1,17 +1,33 @@
 package DTO;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class AccountDTO {
-    private String id;
+    private Long id;
     private String accountNumber;
     private int deposit;
     private int withdraw;
-    private int bankingAt;
+    private String bankingAt;
 
-    public String getId() {
+    private static long acountNum = 1L;
+    public AccountDTO() {
+    }
+
+    public AccountDTO(String accountNumber, int deposit, int withdraw) {
+        this.id = acountNum++;
+        this.accountNumber = accountNumber;
+        this.deposit = deposit;
+        this.withdraw = withdraw;
+        LocalDateTime now = LocalDateTime.now();
+        this.bankingAt = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,22 +55,22 @@ public class AccountDTO {
         this.withdraw = withdraw;
     }
 
-    public int getBankingAt() {
+    public String getBankingAt() {
         return bankingAt;
     }
 
-    public void setBankingAt(int bankingAt) {
+    public void setBankingAt(String bankingAt) {
         this.bankingAt = bankingAt;
     }
 
     @Override
     public String toString() {
         return "AccountDTO{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", deposit=" + deposit +
                 ", withdraw=" + withdraw +
-                ", bankingAt=" + bankingAt +
+                ", bankingAt='" + bankingAt + '\'' +
                 '}';
     }
 }
