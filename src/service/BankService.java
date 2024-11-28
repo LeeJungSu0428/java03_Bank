@@ -20,8 +20,8 @@ public class BankService {
         while (true) {
             System.out.print("계좌번호> ");
             accountNumber = scanner.next();
-            ClientDTO checkClientDTO = bankRepository.checkByAccountNumber(accountNumber);  // 중복체크
-            if (checkClientDTO == null) {
+            ClientDTO checkClientDTO = bankRepository.checkByAccountNumber(accountNumber);  // 중복체크    ClientDTO클래스의 checkClientDTO라는 객체를 만들고 위에서 만든 bankRepository객체에 메서드 부여
+            if (checkClientDTO == null) {                                                    //기존에 ClientDTO라는 List안에 안들어있으면 추가하는 구문인듯?
                 break;
             } else {
                 System.out.println("이미 사용중인 계좌입니다.");
@@ -30,7 +30,7 @@ public class BankService {
         System.out.print("계좌비밀번호> ");
         String clientPass = scanner.next();
         ClientDTO clientDTO = new ClientDTO(clientName, accountNumber, clientPass);
-        if (bankRepository.clientSave(clientDTO)) {
+        if (bankRepository.clientSave(clientDTO)) {                                        //헷갈리지 말기 여기서 쓰인 clientSave는 bankRepository라는 클래스 안에 있는 객체임
             System.out.println("계좌생성");
         } else {
             System.out.println("생성실패");
@@ -41,8 +41,8 @@ public class BankService {
      * 전체계좌 조회
      */
     public void findAll() {
-        List<ClientDTO> clientDTOList = bankRepository.findAll();
-        for (ClientDTO clientDTO : clientDTOList) {
+        List<ClientDTO> clientDTOList = bankRepository.findAll();                       //여기서 쓰인 findAll 구문은 여기 패키지가 아니라 bankRepository 패키지에서 쓰인 findALL
+        for (ClientDTO clientDTO : clientDTOList) {                                     // findAll로 인해 Repository의 clientDTOList라는 clientDTO의 객체들을 불러내고 이를 이 패키지에서 명명한 clientDTOList에 저장함
             System.out.println(clientDTO);
         }
     }
@@ -53,8 +53,8 @@ public class BankService {
     public void checkbalance() {
         System.out.print("조회할 계좌번호> ");
         String accountNumber = scanner.next();
-        ClientDTO clientDTO = bankRepository.checkByAccountNumber(accountNumber);
-        if (clientDTO == null) {
+        ClientDTO clientDTO = bankRepository.checkByAccountNumber(accountNumber);            //위랑 똑같이 ClientDTO 클래스의 clientDTO 객체를 생성하고 checkByAccountNumber메서드 돌림
+        if (clientDTO == null) {                                                              // 이 메서드 돌려보면 알듯이 accountNumber값이 들어있으면 이를 리턴하고 없으면 null을 리턴함
             System.out.println("없는 계좌입니다.");
         } else {
             System.out.println(clientDTO.getBalance() + "원");
