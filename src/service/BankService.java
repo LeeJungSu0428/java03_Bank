@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class BankService {
     Scanner scanner = new Scanner(System.in);
-    repository.bankRepository bankRepository = new bankRepository();
+    repository.bankRepository bankRepository = new bankRepository();       /// repository 폴더에 있는 bankRepository 클래스를 사용해 bankRepository 라는 객체를 만듦
 
     /**
      * 계좌 생성
